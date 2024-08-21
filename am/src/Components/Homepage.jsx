@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/global';
 import Popular from './Popular';
+import Upcoming from './Upcoming';
+import Airing from './Airing';
 
 
 const Homepage = () => {
@@ -90,10 +92,16 @@ const Homepage = () => {
                             getPopularAnime();
                         }}>Popular<i className="fas fa-fire"></i></button>
                     </div>
+
+                    
                     <form className="search-form" onSubmit={handleSubmit}>
                         <div className="input-control">
                             <input type="text" placeholder="Search Anime" value={search} onChange={handleChange} />
                             <button type="submit">Search</button>
+                        </div>
+                        <div>
+ 
+
                         </div>
                     </form>
                     <div className="filter-btn airing-filter">

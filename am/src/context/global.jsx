@@ -94,7 +94,7 @@ export const GlobalContextProvider = ({children}) => {
         const data = await response.json();
         dispatch({type: GET_AIRING_ANIME, payload: data.data})
     }
-
+// FETCHING SEARCHED ITEMS
     //search anime
     const searchAnime = async (anime) => {
         dispatch({type: LOADING})
