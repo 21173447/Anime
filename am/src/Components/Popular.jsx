@@ -1,21 +1,26 @@
-import React from 'react'
-import { useGlobalContext } from '../context/global'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from 'react';
+import { useGlobalContext } from '../context/global';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-const Popular = () => {
-
-    const {popularAnime,isSearch}=useGlobalContext()
+const Popular = ({ rendered }) => {
+    const { popularAnime, isSearch, searchResult } = useGlobalContext();
 
     const conditionalRender = () => {
-        if (!isSearch) {
+        if (!isSearch && rendered === 'popular') {
             return popularAnime.map((anime) => (
                 <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                    <img src={anime.images.jpg.large_image_url} alt="" />
+                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
                 </Link>
-            ))
+            ));
+        } else {
+            return searchResult?.map((anime) => (
+                <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
+                </Link>
+            ));
         }
-    }
+    };
 
     return (
         <PopularStyled>
@@ -23,17 +28,16 @@ const Popular = () => {
                 {conditionalRender()}
             </div>
         </PopularStyled>
-    )
-}
+    );
+};
 
 const PopularStyled = styled.div`
     display: flex;
+    justify-content: center; /* Center the content horizontally */
+
     .popular-anime {
         margin-top: 2rem;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        padding-left: 5rem;
-        padding-right: 0;
+        padding: 2rem 5rem; /* Adjust padding for consistency */
         width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -42,6 +46,7 @@ const PopularStyled = styled.div`
         border-top: 5px solid #e5e7eb;
 
         a {
+            display: block; /* Ensure the link block covers the intended area */
             height: 500px;
             border-radius: 7px;
             border: 5px solid #e5e7eb;

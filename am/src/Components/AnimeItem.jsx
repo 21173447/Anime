@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const AnimeItem = () => {
     const { id } = useParams();
@@ -18,7 +18,7 @@ const AnimeItem = () => {
         status, rating, source
     } = anime;
 
-//get characters
+    //get characters
 
     const getCharacters = async (anime) => {
         const response = await fetch(`https://api.jikan.moe/v4/anime/${anime}/characters`)
@@ -61,17 +61,21 @@ const AnimeItem = () => {
                         <p><span>Season:</span><span>{season}</span></p>
                         <p><span>Duration:</span><span>{duration}</span></p>
                     </div>
+
+
                     <p className="description">
                         {showMore ? synopsis : synopsis?.substring(0, 450) + '...'}
                         <button onClick={() => setShowMore(!showMore)}>
                             {showMore ? 'Show Less' : 'Read More'}
                         </button>
                     </p>
+
+
                     <h3 className='title'>Trailer</h3>
                     <div className="trailer-con">
-                        {trailer?.embed_url ? 
-                            <iframe 
-                                src={trailer?.embed_url} 
+                        {trailer?.embed_url ?
+                            <iframe
+                                src={trailer?.embed_url}
                                 title="Inline Frame Example"
                                 width="800"
                                 height="450"
@@ -81,6 +85,23 @@ const AnimeItem = () => {
                             <h3>Trailer not available</h3>
                         }
                     </div>
+                    <h3 className='title'>Characters</h3>
+                    <div className="characters">
+                        {characters?.map((character, index) => {
+                            const { role } = character
+                            const { images, name, mal_id } = character.character
+                            return <Link to={`/character/${mal_id}`} key={index}>
+                                <div className="character">
+                                    <img src={images?.jpg.image_url} alt="" />
+                                    <h4>{name}</h4>
+                                    <p>{role}</p>
+                                </div>
+                            </Link>
+
+                        })}
+
+                    </div>
+
                 </div>
             </div>
         </div>
