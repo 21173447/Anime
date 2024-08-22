@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+
+
+search-container{
+padding: 0;
+
+}
  
   * {
     margin: 0;

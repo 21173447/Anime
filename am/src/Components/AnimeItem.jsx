@@ -106,6 +106,11 @@ const AnimeItem = () => {
                             <button className="watch-button">Watch Episodes</button>
                         </Link>
                     </div>
+                    <div className="watch-episodes">
+                        <Link to={`/`}>
+                            <button className="watch-button">Back to home</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

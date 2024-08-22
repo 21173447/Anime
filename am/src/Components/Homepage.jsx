@@ -1,9 +1,13 @@
+
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/global';
 import Popular from './Popular';
 import Upcoming from './Upcoming';
 import Airing from './Airing';
+import Header from './Header';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 
 const Homepage = () => {
     const { 
@@ -13,7 +17,6 @@ const Homepage = () => {
         getUpcomingAnime,
         getAiringAnime,
         getPopularAnime,
-        popularAnime,
         searchResults,
         isSearch,
         loading
@@ -60,44 +63,24 @@ const Homepage = () => {
     };
 
     return (
-        <div>
-            <header>
-                <div className="logo">
-                    <h1>{rendered.charAt(0).toUpperCase() + rendered.slice(1)} Anime</h1>
-                </div>
-                <div className="search-container">
-                    <button onClick={() => {
-                        setRendered('popular');
-                        getPopularAnime();
-                    }}>
-                        Popular<i className="fas fa-fire"></i>
-                    </button>
-
-                    <form className="search-form" onSubmit={handleSubmit}>
-                        <div className="input-control">
-                            <input type="text" placeholder="Search Anime" value={search} onChange={handleChange} />
-                            <button type="submit">Search</button>
-                        </div>
-                    </form>
-
-                    <button onClick={() => {
-                        setRendered('airing');
-                        getAiringAnime();
-                    }}>
-                        Airing
-                    </button>
-
-                    <button onClick={() => {
-                        setRendered('upcoming');
-                        getUpcomingAnime();
-                    }}>
-                        Upcoming
-                    </button>
-                </div>
-            </header>
+        <HomepageStyled>
+            <Header
+                setRendered={setRendered}
+                getPopularAnime={getPopularAnime}
+                getAiringAnime={getAiringAnime}
+                getUpcomingAnime={getUpcomingAnime}
+                handleSubmit={handleSubmit}
+                search={search}
+                handleChange={handleChange}
+                rendered={rendered}
+            />
             {renderContent()}
-        </div>
+        </HomepageStyled>
     );
 };
+
+const HomepageStyled = styled.div`
+    /* Add any additional styles for the Homepage component here */
+`;
 
 export default Homepage;
