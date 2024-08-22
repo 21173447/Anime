@@ -5,12 +5,10 @@ import Popular from './Popular';
 import Upcoming from './Upcoming';
 import Airing from './Airing';
 
-
 const Homepage = () => {
     const { 
         handleSubmit, 
         search, 
-        searchAnime,
         handleChange,
         getUpcomingAnime,
         getAiringAnime,
@@ -24,55 +22,40 @@ const Homepage = () => {
     const [rendered, setRendered] = React.useState('popular');
 
     const renderContent = () => {
-        if (loading) {
-            return <div>Loading...</div>;
-        }
+        if (loading) return <div>Loading...</div>;
 
-        if (isSearch && searchResults.length > 0) {
+        if (isSearch) {
             return (
                 <div className="search-results">
-                    {searchResults.map((anime) => (
-                        <div key={anime.mal_id} className="anime-card">
-                            <Link to={`/anime/${anime.mal_id}`}>
-                                <div className="image-container">
-                                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title} />
-                                    <div className="title-overlay">
-                                        <p>{anime.title}</p>
+                    {searchResults.length > 0 ? (
+                        searchResults.map((anime) => (
+                            <div key={anime.mal_id} className="anime-card">
+                                <Link to={`/anime/${anime.mal_id}`}>
+                                    <div className="image-container">
+                                        <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title} />
+                                        <div className="title-overlay">
+                                            <p>{anime.title}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            );
-        }
-
-        if (!isSearch && rendered === 'popular') {
-            return (
-                <div className="anime-grid">
-                    {popularAnime.map((anime) => (
-                        <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                            <div className="image-container">
-                                <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title} />
-                                <div className="title-overlay">
-                                    <p>{anime.title}</p>
-                                </div>
+                                </Link>
                             </div>
-                        </Link>
-                    ))}
+                        ))
+                    ) : (
+                        <div>No results found</div>
+                    )}
                 </div>
             );
         }
 
         switch (rendered) {
             case 'popular':
-                return <Popular rendered={rendered} />;
+                return <Popular />;
             case 'airing':
-                return <Airing rendered={rendered} />;
+                return <Airing />;
             case 'upcoming':
-                return <Upcoming rendered={rendered} />;
+                return <Upcoming />;
             default:
-                return <Popular rendered={rendered} />;
+                return <Popular />;
         }
     };
 
@@ -80,42 +63,36 @@ const Homepage = () => {
         <div>
             <header>
                 <div className="logo">
-                    <h1>
-                        {rendered === 'popular' ? 'Popular Anime' : 
-                        rendered === 'airing' ? 'Airing Anime' : 'Upcoming Anime'}
-                    </h1>
+                    <h1>{rendered.charAt(0).toUpperCase() + rendered.slice(1)} Anime</h1>
                 </div>
                 <div className="search-container">
-                    <div className="filter-btn popular-filter">
-                        <button onClick={() => {
-                            setRendered('popular');
-                            getPopularAnime();
-                        }}>Popular<i className="fas fa-fire"></i></button>
-                    </div>
+                    <button onClick={() => {
+                        setRendered('popular');
+                        getPopularAnime();
+                    }}>
+                        Popular<i className="fas fa-fire"></i>
+                    </button>
 
-                    
                     <form className="search-form" onSubmit={handleSubmit}>
                         <div className="input-control">
                             <input type="text" placeholder="Search Anime" value={search} onChange={handleChange} />
                             <button type="submit">Search</button>
                         </div>
-                        <div>
- 
-
-                        </div>
                     </form>
-                    <div className="filter-btn airing-filter">
-                        <button onClick={() => {
-                            setRendered('airing');
-                            getAiringAnime();
-                        }}>Airing</button>
-                    </div>
-                    <div className="filter-btn upcoming-filter">
-                        <button onClick={() => {
-                            setRendered('upcoming');
-                            getUpcomingAnime();
-                        }}>Upcoming</button>
-                    </div>
+
+                    <button onClick={() => {
+                        setRendered('airing');
+                        getAiringAnime();
+                    }}>
+                        Airing
+                    </button>
+
+                    <button onClick={() => {
+                        setRendered('upcoming');
+                        getUpcomingAnime();
+                    }}>
+                        Upcoming
+                    </button>
                 </div>
             </header>
             {renderContent()}

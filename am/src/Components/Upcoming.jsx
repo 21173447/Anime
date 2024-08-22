@@ -4,28 +4,22 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Upcoming = ({ rendered }) => {
-    const { upcomingAnime, isSearch, searchResult } = useGlobalContext(); // Adjusted for upcomingAnime
+    const { upcomingAnime, isSearch, searchResult } = useGlobalContext(); 
 
-    const conditionalRender = () => {
-        if (!isSearch && rendered === 'upcoming') { // Changed to 'upcoming'
-            return upcomingAnime.map((anime) => (
-                <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
-                </Link>
-            ));
-        } else {
-            return searchResult?.map((anime) => (
-                <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
-                </Link>
-            ));
-        }
+    const renderAnimes = () => {
+        
+        const animeList = isSearch ? searchResult : upcomingAnime;
+        return animeList.map(anime => (
+            <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+                <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
+            </Link>
+        ));
     };
 
     return (
         <UpcomingStyled>
             <div className="upcoming-anime">
-                {conditionalRender()}
+                {renderAnimes()}
             </div>
         </UpcomingStyled>
     );
@@ -47,9 +41,9 @@ const UpcomingStyled = styled.div`
 
         a {
             display: block; /* Ensure the link block covers the intended area */
-            height: 500px;
             border-radius: 7px;
             border: 5px solid #e5e7eb;
+            overflow: hidden; /* Ensure content does not overflow */
         }
 
         a img {

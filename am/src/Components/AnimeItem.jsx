@@ -18,16 +18,15 @@ const AnimeItem = () => {
         status, rating, source
     } = anime;
 
-    //get characters
-
+    // Fetch characters
     const getCharacters = async (anime) => {
-        const response = await fetch(`https://api.jikan.moe/v4/anime/${anime}/characters`)
-        const data = await response.json()
-        setCharacters(data.data)
-        console.log(data.data)
-    }
+        const response = await fetch(`https://api.jikan.moe/v4/anime/${anime}/characters`);
+        const data = await response.json();
+        setCharacters(data.data);
+        console.log(data.data);
+    };
 
-    // Getting anime by id
+    // Fetch anime by ID
     const getAnime = async () => {
         const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
         const data = await response.json();
@@ -37,8 +36,8 @@ const AnimeItem = () => {
 
     useEffect(() => {
         getAnime(id);
-        getCharacters(id)
-    }, []);
+        getCharacters(id);
+    }, [id]);
 
     return (
         <div>
@@ -62,14 +61,12 @@ const AnimeItem = () => {
                         <p><span>Duration:</span><span>{duration}</span></p>
                     </div>
 
-
                     <p className="description">
                         {showMore ? synopsis : synopsis?.substring(0, 450) + '...'}
                         <button onClick={() => setShowMore(!showMore)}>
                             {showMore ? 'Show Less' : 'Read More'}
                         </button>
                     </p>
-
 
                     <h3 className='title'>Trailer</h3>
                     <div className="trailer-con">
@@ -85,23 +82,30 @@ const AnimeItem = () => {
                             <h3>Trailer not available</h3>
                         }
                     </div>
+
                     <h3 className='title'>Characters</h3>
                     <div className="characters">
                         {characters?.map((character, index) => {
-                            const { role } = character
-                            const { images, name, mal_id } = character.character
-                            return <Link to={`/character/${mal_id}`} key={index}>
-                                <div className="character">
-                                    <img src={images?.jpg.image_url} alt="" />
-                                    <h4>{name}</h4>
-                                    <p>{role}</p>
-                                </div>
-                            </Link>
-
+                            const { role } = character;
+                            const { images, name, mal_id } = character.character;
+                            return (
+                                <Link to={`/character/${mal_id}`} key={index}>
+                                    <div className="character">
+                                        <img src={images?.jpg.image_url} alt="" />
+                                        <h4>{name}</h4>
+                                        <p>{role}</p>
+                                    </div>
+                                </Link>
+                            );
                         })}
-
                     </div>
 
+                   
+                    <div className="watch-episodes">
+                        <Link to={`/anime/${id}/episodes`}>
+                            <button className="watch-button">Watch Episodes</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

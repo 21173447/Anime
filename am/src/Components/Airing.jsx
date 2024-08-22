@@ -3,29 +3,22 @@ import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Airing = ({ rendered }) => {
-    const { airingAnime, isSearch, searchResult } = useGlobalContext(); // Adjusted for airingAnime
+const Airing = () => {
+    const { airingAnime, searchResults, isSearch } = useGlobalContext();
 
-    const conditionalRender = () => {
-        if (!isSearch && rendered === 'airing') { // Changed to 'airing'
-            return airingAnime.map((anime) => (
-                <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
-                </Link>
-            ));
-        } else {
-            return searchResult?.map((anime) => (
-                <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                    <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
-                </Link>
-            ));
-        }
+    const renderAnimes = () => {
+        const animeList = isSearch ? searchResults : airingAnime;
+        return animeList.map(anime => (
+            <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+                <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title || 'Anime Image'} />
+            </Link>
+        ));
     };
 
     return (
         <AiringStyled>
             <div className="airing-anime">
-                {conditionalRender()}
+                {renderAnimes()}
             </div>
         </AiringStyled>
     );
@@ -47,12 +40,9 @@ const AiringStyled = styled.div`
 
         a {
             display: block; /* Ensure the link block covers the intended area */
-            height: 500px;
-            border-radius: 7px;
-            border: 5px solid #e5e7eb;
         }
 
-        a img {
+        img {
             width: 100%;
             height: 100%;
             object-fit: cover;
