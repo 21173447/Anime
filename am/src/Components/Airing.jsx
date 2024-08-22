@@ -16,7 +16,7 @@ const Airing = () => {
                 <img 
                     src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} 
                     alt={anime.title || 'Anime Image'} 
-                    className="w-[50%] h-full object-cover rounded-lg"
+                    className="w-[60%] h-full object-cover rounded-lg"
                 />
             </Link>
         ));

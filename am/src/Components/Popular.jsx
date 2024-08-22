@@ -1,9 +1,17 @@
 import React from 'react';
 import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 const Popular = () => {
+   
     const { popularAnime, searchResults, isSearch } = useGlobalContext();
+    
+
+
+   
+
+
 
     const renderAnimes = () => {
         const animeList = isSearch ? searchResults : popularAnime;
@@ -20,7 +28,7 @@ const Popular = () => {
 
     return (
         <div className="flex flex-col items-center">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 py-40">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-10 px-4">
                 {renderAnimes()}
             </div>
         </div>

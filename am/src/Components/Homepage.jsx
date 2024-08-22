@@ -80,7 +80,7 @@ const Homepage = () => {
 };
 
 const HomepageStyled = styled.div`
-    /* Add any additional styles for the Homepage component here */
+   
 `;
 
 export default Homepage;

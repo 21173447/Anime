@@ -136,7 +136,7 @@ export const GlobalContextProvider = ({ children }) => {
             getUpcomingAnime,
             getAiringAnime,
             getAnimePictures,
-            getAnimeEpisodes // Add the new function to the context
+            getAnimeEpisodes 
         }}>
             {children}
         </GlobalContext.Provider>
