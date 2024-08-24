@@ -1,13 +1,11 @@
-
 import React from 'react';
 import { useGlobalContext } from '../context/global';
 import Popular from './Popular';
 import Upcoming from './Upcoming';
 import Airing from './Airing';
 import Header from './Header';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import Footer from './Footer';
 
 const Homepage = () => {
     const { 
@@ -29,15 +27,15 @@ const Homepage = () => {
 
         if (isSearch) {
             return (
-                <div className="search-results">
+                <div className="flex flex-wrap size-50 flex-row">
                     {searchResults.length > 0 ? (
                         searchResults.map((anime) => (
-                            <div key={anime.mal_id} className="anime-card">
+                            <div key={anime.mal_id} className="">
                                 <Link to={`/anime/${anime.mal_id}`}>
                                     <div className="image-container">
                                         <img src={anime.images?.jpg?.large_image_url || 'default-image.jpg'} alt={anime.title} />
                                         <div className="title-overlay">
-                                            <p>{anime.title}</p>
+                                        
                                         </div>
                                     </div>
                                 </Link>
@@ -63,7 +61,7 @@ const Homepage = () => {
     };
 
     return (
-        <HomepageStyled>
+        <div>
             <Header
                 setRendered={setRendered}
                 getPopularAnime={getPopularAnime}
@@ -73,14 +71,16 @@ const Homepage = () => {
                 search={search}
                 handleChange={handleChange}
                 rendered={rendered}
+
+            
+
             />
+             
             {renderContent()}
-        </HomepageStyled>
+            <Footer setRendered={setRendered} />
+
+        </div>
     );
 };
-
-const HomepageStyled = styled.div`
-   
-`;
 
 export default Homepage;

@@ -15,14 +15,18 @@ const AnimeEpisodes = () => {
   }
 
   return (
-    <div className="episodes-container">
+    <div className="episodes-container flex">
       <h2>Episodes List</h2>
       {episodes.length > 0 ? (
         <ul>
           {episodes.map((episode) => (
             <li key={episode.mal_id}>
               <p><strong>{episode.episode_id}:</strong> {episode.title}</p>
-              <a href={episode.url} target="_blank" rel="noopener noreferrer">Watch Episode</a>
+              <button className='bg-green-500'>
+
+              <a href={episode.url} target="_blank" rel="">Watch Episode</a>
+              </button>
+             
             </li>
           ))}
         </ul>
