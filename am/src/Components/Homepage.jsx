@@ -27,7 +27,7 @@ const Homepage = () => {
 
         if (isSearch) {
             return (
-                <div className="flex flex-wrap size-50 flex-row">
+                <div className="grid grid-cols-10 " >
                     {searchResults.length > 0 ? (
                         searchResults.map((anime) => (
                             <div key={anime.mal_id} className="">
