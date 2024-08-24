@@ -35,7 +35,6 @@ const reducer = (state, action) => {
     }
 };
 
-// Global Context Provider
 export const GlobalContextProvider = ({ children }) => {
     // Initial state
     const initialState = {
