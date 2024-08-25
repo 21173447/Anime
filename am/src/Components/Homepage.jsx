@@ -6,6 +6,7 @@ import Airing from './Airing';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
+import Spinner from '../context/Spinner';
 
 const Homepage = () => {
     const { 
@@ -23,7 +24,7 @@ const Homepage = () => {
     const [rendered, setRendered] = React.useState('popular');
 
     const renderContent = () => {
-        if (loading) return <div>Loading...</div>;
+        if (loading) return <div><Spinner/></div>;
 
         if (isSearch) {
             return (
