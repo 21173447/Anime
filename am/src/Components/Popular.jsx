@@ -32,17 +32,17 @@ const Popular = () => {
                 <img
                     src={anime.images?.jpg?.large_image_url || 'default-image.jpg'}
                     alt={anime.title || 'Anime Image'}
-                    className="w-[70%] h-full object-cover "
+                    className="w-[70%] h-full object-cover : "
                 />
             </Link>
         ));
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center ">
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 py-10 ">
-                {renderAnimes()}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 py-10  ">
+                {renderAnimes()} 
             </div>
             <div className=' bg-green-400 w-60 mb-2 rounded-full'>
                 <ReactPaginate className='flex justify-center gap-5 text-white   '

@@ -20,10 +20,10 @@ const Gallery = () => {
   }, [id, getAnimePictures]);
 
   return (
-    <div>
+    <div className=''>
       <div className="back">
         <Link to="/">
-          <i className="fas fa-arrow-left"></i>
+          <i className=""></i>
           Back to Home
         </Link>
       </div>

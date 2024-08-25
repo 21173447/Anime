@@ -27,7 +27,7 @@ const Homepage = () => {
 
         if (isSearch) {
             return (
-                <div className="grid grid-cols-10 " >
+                <div className="grid grid-cols-10 py-3" >
                     {searchResults.length > 0 ? (
                         searchResults.map((anime) => (
                             <div key={anime.mal_id} className="">

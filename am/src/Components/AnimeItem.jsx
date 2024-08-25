@@ -37,17 +37,26 @@ const AnimeItem = () => {
 
     return (
         <div>
-        
-        
-
-            <main className="container mx-auto p-4">
-                <h1 className="text-2xl mb-7">{title} {id}</h1>
+            <Header
+                setRendered={() => {}}
+                getPopularAnime={() => {}}
+                getAiringAnime={() => {}}
+                getUpcomingAnime={() => {}}
+                handleSubmit={() => {}}
+              
+                handleChange={() => {}}
+                rendered=""
+                title={title}  
+                showNav={false}
+            />
+            <main className="container w-full px-4">
+                <h1 className="text-2xl mb-7">{title}</h1>
                 <div className="details space-y-4">
                     <div className="detail flex flex-col sm:flex-row gap-6">
-                        <div className="image flex-shrink-0">
-                            <img src={images?.jpg.large_image_url} alt={title} className="w-64 h-auto object-cover rounded-md" />
+                        <div className="">
+                            <img src={images?.jpg.large_image_url} alt={title} className="w-64 h-auto object-cover " />
                         </div>
-                        <div className="anime-details space-y-0 p-10">
+                        <div className="anime-details space-y-0 p-10  ">
                             <p><span className="font-semibold">Aired:</span> <span>{aired?.string}</span></p>
                             <p><span className="font-semibold">Rating:</span> <span>{rating}</span></p>
                             <p><span className="font-semibold">Rank:</span> <span>{rank}</span></p>
@@ -78,14 +87,14 @@ const AnimeItem = () => {
                                 src={trailer?.embed_url}
                                 title="Trailer"
                                 className="w-full h-full md:h-96"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allow="accelerometer; autoplay; clipboard-write; "
                                 allowFullScreen>
                             </iframe>
                         ) : (
                             <h3 className="text-red-500">Trailer not available</h3>
                         )}
                     </div>
-                    <div className='flex gap-10 justify-center bg-green-100 h-40'>
+                    <div className='flex gap-10 justify-center bg-green-100 h-40 rounded-full '>
                         <div className="watch-episodes mt-16">
                             <Link to={`/anime/${id}/episodes`}>
                                 <button className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4">
@@ -119,7 +128,6 @@ const AnimeItem = () => {
                 </div>
             </main>
 
-            {/* Include Footer */}
             <Footer />
         </div>
     );

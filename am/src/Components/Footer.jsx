@@ -13,7 +13,7 @@ const Footer = ({ setRendered }) => {
                         <li>
                             <button
                                 onClick={() => setRendered('popular')}
-                                className="hover:text-gray-500 text-white semi-bold text-lg"
+                                className="hover:text-green-600 text-white semi-bold text-lg"
                             >
                                 Popular
                             </button>
@@ -21,7 +21,7 @@ const Footer = ({ setRendered }) => {
                         <li>
                             <button
                                 onClick={() => setRendered('upcoming')}
-                                className="hover:text-gray-500 text-white semi-bold text-lg"
+                                className="hover:text-green-600 text-white semi-bold text-lg"
                             >
                                 Upcoming
                             </button>
@@ -29,7 +29,7 @@ const Footer = ({ setRendered }) => {
                         <li>
                             <button
                                 onClick={() => setRendered('airing')}
-                                className="hover:text-gray-500 text-white semi-bold text-lg"
+                                className="hover:text-green-600 text-white semi-bold text-lg"
                             >
                                 Airing
                             </button>
